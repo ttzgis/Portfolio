@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,700,700i|Josefin+Sans:700" rel="stylesheet">
         <link href="assets/css/main.css" rel="stylesheet">
-        <link rel="icon" href="assets/images/logo.png">
+        <link rel="icon" href="assets/images/logo-globe.svg">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         
     </head>
@@ -21,31 +21,60 @@
         <div id="index">                                           <!-- Index starts here -->
             <div class="container main">
                 <div class="row home">
-                    <div id = "index_left" class="col-md-6 left">
-                        <img class="img-responsive img-rabbit" src="assets/images/home.jpg">
-                    </div>
-                    <div id = "index_right" class="col-md-6 text-center right">
-                        <div class="logo">
-                            <img src="assets/images/logo.png">
-                            <h4>I am rabbit</h4>
+                    <div class="col-sm-12 home-panel text-center">
+                        <div id="index_left" class="home-copy">
+                            <h1 class="home-title">PORTFOLIO</h1>
+                            <p class="home-subtitle">Trutz Bongartz | GIS Specialist</p>
                         </div>
-                        <p class="home-description">
-                            Hi, I am Rabbit, Web developer from michigan, US. I am passionate about design, development and interaction. I really love what I do.
-                        </p>
-                        <div class="btn-group-vertical custom_btn animated slideinright">
-                            <div id="about" class="btn btn-rabbit">About</div>
-                            <div id="work" class="btn btn-rabbit">Work</div>
-                            <div id="contact" class="btn btn-rabbit">Contact</div>
-                        </div>      
-                        <div class="social">
-                            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        <div id="index_right" class="home-actions animated slideinright">
+                            <div id="work" class="home-nav-block">
+                                <span class="home-nav-label">Auswahl</span>
+                                <strong>Projects</strong>
+                            </div>
+                            <div id="contact" class="home-nav-block">
+                                <span class="home-nav-label">Direkt</span>
+                                <strong>Kontakt</strong>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                
+                <div class="row home-skills-row">
+                    <div class="col-sm-12">
+                        <div class="home-skills-intro text-center">
+                            <h2 class="page-title">Skills</h2>
+                        </div>
+                        <div class="home-skill-grid">
+                            <div class="skill-block">
+                                <h3>GIS & Analyse</h3>
+                                <ul class="skill-tags">
+                                    <li class="skill-tag-strong">ArcGIS Pro</li>
+                                    <li class="skill-tag-strong">QGIS</li>
+                                    <li>FME</li>
+                                    <li>GeoAI</li>
+                                </ul>
+                            </div>
+                            <div class="skill-block">
+                                <h3>Daten & Automation</h3>
+                                <ul class="skill-tags">
+                                    <li class="skill-tag-strong">PostgreSQL</li>
+                                    <li>PostGIS</li>
+                                    <li class="skill-tag-strong">Python</li>
+                                    <li>R</li>
+                                </ul>
+                            </div>
+                            <div class="skill-block">
+                                <h3>Web</h3>
+                                <ul class="skill-tags">
+                                    <li>Git</li>
+                                    <li class="skill-tag-muted">HTML</li>
+                                    <li class="skill-tag-muted">CSS</li>
+                                    <li class="skill-tag-muted">JavaScript</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>                                                      <!-- index ends here -->
 
@@ -78,8 +107,8 @@
                     <div class="col-md-6" id="work_left">
                         <div id="owl-demo" class="owl-carousel owl-theme">
                             <div class="item"><img class="img-responsive img-rabbit" src="assets/images/work.jpg"></div>
-                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/home.jpg"></div>
-                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/contact.jpg"></div>
+                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/TTZ.jpg"></div>
+                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/contact_tyrol.jpg"></div>
                         </div>
                     </div>
 
@@ -100,48 +129,20 @@
 
         <div id="contact_scroll" class="pages">                             <!-- Contact starts here -->
             <div class="container main">
-                <div class="row">
+                <div class="row contact-row">
                     <div class="col-md-6 left" id="contact_left">
-                        <img class="img-responsive img-rabbit" src="assets/images/contact.jpg">
+                        <img class="img-responsive img-rabbit" src="assets/images/contact_tyrol.jpg">
                     </div>
 
                     <div class="col-md-6 right" id="contact_right">
                         <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Back to Home </a>
-                        <div id="watermark">
-                            <h2 class="page-title" text-center>Contact</h2>
-                            <div class="marker">c</div>
-                        </div>
-                        <p class='subtitle'>I'm based in cheltenham in the UK, not far from Bristol, Birmingham, Oxford and Swindom. Drop me a line.
-                        </p>
-                        <!-- form -->
-                        <form class="form_edit"> 
-                            <div class="form-group">
-                                <input type="name" class="form-control" id="exampleInputName" placeholder="Name">
-                            </div>
-
-                            <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                            </div>
-
-                            <div class="form-group">
-                            <textarea class="form-control" rows="5" placeholder="Message"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-rabbit submit">Send Message</button>
-                        </form>
+                        <h2 class="page-title">KONTAKT</h2>
+                        <a class="btn btn-rabbit contact-linkedin" href="https://www.linkedin.com/in/trutz-b-ab920825b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profil">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-       
-            <footer class="text-center">
-                <div class="container bottom">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p>Made with <i class="fa fa-heartbeat" aria-hidden="true"></i> by <a href="https://themewagon.com/">Themewagon</a></p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            
         </div>                                                              <!-- Contact ends here -->
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

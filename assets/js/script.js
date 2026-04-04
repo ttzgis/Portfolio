@@ -1,4 +1,9 @@
 $( document ).ready(function() {
+                function restartAnimation(selector, animationClass) {
+                    $(selector).removeClass('animated slideInLeft slideInRight');
+                    void $(selector)[0].offsetWidth;
+                    $(selector).addClass('animated ' + animationClass);
+                }
                 
                 $("#about_scroll").fadeOut();   
                 $("#work_scroll").fadeOut();
@@ -7,27 +12,27 @@ $( document ).ready(function() {
                 $("#about").click(function(){
                     $("#index").fadeOut();
                     $("#about_scroll").fadeIn();
-                    $('#about_left').addClass('animated slideInLeft');
-                    $('#about_right').addClass('animated slideInRight');
+                    restartAnimation('#about_left', 'slideInLeft');
+                    restartAnimation('#about_right', 'slideInRight');
                     });
                 $("#work").click(function(){
                     $("#index").fadeOut();
                     $("#work_scroll").fadeIn();
-                    $('#work_left').addClass('animated slideInLeft');
-                    $('#work_right').addClass('animated slideInRight');
+                    restartAnimation('#work_left', 'slideInLeft');
+                    restartAnimation('#work_right', 'slideInRight');
                     });
                 $("#contact").click(function(){
                     $("#index").fadeOut();
                     $("#contact_scroll").fadeIn();
-                    $('#contact_left').addClass('animated slideInLeft');
-                    $('#contact_right').addClass('animated slideInRight');
+                    restartAnimation('#contact_left', 'slideInLeft');
+                    restartAnimation('#contact_right', 'slideInRight');
                     });
                 
                 $(".back").click(function(){
                     $(".pages").fadeOut();
                     $("#index").fadeIn();
-                    $('#index_left').addClass('animated slideInLeft');
-                    $('#index_right').addClass('animated slideInRight');
+                    restartAnimation('#index_left', 'slideInLeft');
+                    restartAnimation('#index_right', 'slideInRight');
                     });
            
 		});

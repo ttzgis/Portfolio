@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">GIS Layers Logo B</title>
+  <desc id="desc">Minimal stacked 3D tiles with a technical GIS look.</desc>
+  <defs>
+    <linearGradient id="topB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#edf3ef"/>
+    </linearGradient>
+    <linearGradient id="midB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d9e7dd"/>
+      <stop offset="100%" stop-color="#c3d8c9"/>
+    </linearGradient>
+    <linearGradient id="lowB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b5cfbc"/>
+      <stop offset="100%" stop-color="#99b8a2"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="none" stroke="#111111" stroke-linejoin="round" stroke-linecap="round">
+    <polygon points="120,42 194,84 120,126 46,84" fill="url(#topB)" stroke-width="3"/>
+    <polygon points="120,96 194,138 120,180 46,138" fill="url(#midB)" stroke-width="3"/>
+    <polygon points="120,150 194,192 120,234 46,192" fill="url(#lowB)" stroke-width="3"/>
+
+    <path d="M120 42l0 84" stroke-width="2"/>
+    <path d="M120 96l0 84" stroke-width="2"/>
+    <path d="M120 150l0 84" stroke-width="2"/>
+
+    <path d="M82 63l38 21 38-21" stroke-width="2"/>
+    <path d="M82 117l38 21 38-21" stroke-width="2"/>
+    <path d="M82 171l38 21 38-21" stroke-width="2"/>
+
+    <path d="M70 90l50-28 50 28" stroke-width="1.8" opacity="0.65"/>
+    <path d="M70 144l50-28 50 28" stroke-width="1.8" opacity="0.65"/>
+  </g>
+</svg>

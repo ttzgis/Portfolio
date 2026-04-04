@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">GIS Layers Logo A</title>
+  <desc id="desc">Three stacked isometric tiles representing GIS layers.</desc>
+  <defs>
+    <linearGradient id="topA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7faf7"/>
+      <stop offset="100%" stop-color="#dde9df"/>
+    </linearGradient>
+    <linearGradient id="midA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d9eadf"/>
+      <stop offset="100%" stop-color="#b8d4c1"/>
+    </linearGradient>
+    <linearGradient id="lowA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b3d0be"/>
+      <stop offset="100%" stop-color="#8eb49c"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="none" stroke="#111111" stroke-linejoin="round" stroke-linecap="round">
+    <polygon points="120,36 186,74 120,112 54,74" fill="url(#topA)" stroke-width="3"/>
+    <polygon points="120,92 186,130 120,168 54,130" fill="url(#midA)" stroke-width="3"/>
+    <polygon points="120,148 186,186 120,224 54,186" fill="url(#lowA)" stroke-width="3"/>
+
+    <path d="M87 55l33 19 33-19" stroke-width="2"/>
+    <path d="M87 111l33 19 33-19" stroke-width="2"/>
+    <path d="M87 167l33 19 33-19" stroke-width="2"/>
+
+    <path d="M120 36v76" stroke-width="2"/>
+    <path d="M120 92v76" stroke-width="2"/>
+    <path d="M120 148v76" stroke-width="2"/>
+  </g>
+</svg>
