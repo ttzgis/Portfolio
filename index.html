@@ -14,6 +14,8 @@
         <link href="assets/css/main.css" rel="stylesheet">
         <link rel="icon" href="assets/images/logo-globe.svg">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/proj4@2/dist/proj4.js"></script>
         
     </head>
 
@@ -25,6 +27,87 @@
                         <div id="index_left" class="home-copy">
                             <h1 class="home-title">PORTFOLIO</h1>
                             <p class="home-subtitle">Trutz Bongartz | GIS Specialist</p>
+                        </div>
+                        <div class="journey-map-shell" aria-label="Bildungs- und Karriereweg in Mitteleuropa">
+                            <div class="journey-sidebar">
+                                <article class="journey-tile" data-stop-id="stop-damme" tabindex="0">
+                                    <img class="journey-tile-image" src="assets/images/journey/journey-damme.jpg" alt="Gymnasium Damme">
+                                    <span class="journey-tile-year">2014</span>
+                                    <h3>1. GYMNASIUM DAMME</h3>
+                                    <p>Abitur<br>49401</p>
+                                </article>
+
+                                <article class="journey-tile" data-stop-id="stop-hannover-bsc" tabindex="0">
+                                    <img class="journey-tile-image" src="assets/images/journey/journey-hannover-bsc.jpg" alt="Leibniz Universitaet Hannover">
+                                    <span class="journey-tile-year">2019</span>
+                                    <h3>2. LEIBNIZ UNIVERSITAET HANNOVER</h3>
+                                    <p>B.Sc. Geowissenschaften</p>
+                                </article>
+
+                                <article class="journey-tile" data-stop-id="stop-berlin" tabindex="0">
+                                    <img class="journey-tile-image" src="assets/images/journey/journey-berlin.jpg" alt="TU Berlin">
+                                    <span class="journey-tile-year">2021</span>
+                                    <h3>3. TECHNISCHE UNIVERSITAET BERLIN</h3>
+                                    <p>M.Sc. Geotechnologie</p>
+                                </article>
+
+                                <article class="journey-tile" data-stop-id="stop-hannover-msc" tabindex="0">
+                                    <img class="journey-tile-image" src="assets/images/journey/journey-hannover-msc.jpg" alt="HDI Zentrale Hannover">
+                                    <span class="journey-tile-year">2024</span>
+                                    <h3>4. HD GLOBAL SE HANNOVER</h3>
+                                    <p>M.Sc. Geowissenschaften<br>Werkstudent Naturgefahrenmodellierung bei HDI</p>
+                                </article>
+
+                                <article class="journey-tile" data-stop-id="stop-innsbruck" tabindex="0">
+                                    <img class="journey-tile-image" src="assets/images/journey/journey-innsbruck.jpg" alt="ILF in Innsbruck">
+                                    <span class="journey-tile-year">Heute</span>
+                                    <h3>5. ILF CONSULTING ENGINEERS</h3>
+                                    <p>GIS Specialist<br>ILF</p>
+                                </article>
+                            </div>
+
+                            <div class="journey-map-stage">
+                                <svg class="journey-map" viewBox="0 0 760 420" aria-hidden="true">
+                                    <defs>
+                                        <marker id="journey-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"></path>
+                                        </marker>
+                                        <clipPath id="journey-map-clip">
+                                            <rect class="journey-clip-rect" x="0" y="0" width="760" height="420" rx="24" ry="24"></rect>
+                                        </clipPath>
+                                    </defs>
+                                    <rect class="journey-sea" x="0" y="0" width="760" height="420" rx="24" ry="24"></rect>
+                                    <g class="journey-country-layer" clip-path="url(#journey-map-clip)"></g>
+                                    <g class="journey-leader-line-layer"></g>
+                                    <g class="journey-leader-hit-layer"></g>
+                                    <g class="journey-route-layer" clip-path="url(#journey-map-clip)"></g>
+                                </svg>
+
+                                <div class="journey-stop stop-damme" data-stop-id="stop-damme" data-lon="8.195556" data-lat="52.522222">
+                                    <span class="journey-dot" aria-hidden="true"></span>
+                                    <button class="journey-label" type="button" aria-label="Damme, Abitur 2014">1</button>
+                                </div>
+
+                                <div class="journey-stop stop-hannover-bsc" data-stop-id="stop-hannover-bsc" data-lon="9.738611" data-lat="52.374444">
+                                    <span class="journey-dot" aria-hidden="true"></span>
+                                    <button class="journey-label" type="button" aria-label="Hannover, Bachelor Geowissenschaften 2019">2</button>
+                                </div>
+
+                                <div class="journey-stop stop-berlin" data-stop-id="stop-berlin" data-lon="13.383333" data-lat="52.516667">
+                                    <span class="journey-dot" aria-hidden="true"></span>
+                                    <button class="journey-label" type="button" aria-label="Berlin, Master Geotechnologie 2021">3</button>
+                                </div>
+
+                                <div class="journey-stop stop-hannover-msc" data-stop-id="stop-hannover-msc" data-lon="9.738611" data-lat="52.374444">
+                                    <span class="journey-dot" aria-hidden="true"></span>
+                                    <button class="journey-label" type="button" aria-label="Hannover, Master Geowissenschaften 2024 und Werkstudent bei HDI">4</button>
+                                </div>
+
+                                <div class="journey-stop stop-innsbruck" data-stop-id="stop-innsbruck" data-lon="11.393333" data-lat="47.268333">
+                                    <span class="journey-dot" aria-hidden="true"></span>
+                                    <button class="journey-label" type="button" aria-label="Innsbruck, GIS Specialist bei ILF">5</button>
+                                </div>
+                            </div>
                         </div>
                         <div id="index_right" class="home-actions animated slideinright">
                             <div id="work" class="home-nav-block">
@@ -147,6 +230,7 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/data/CNTR_RG_20M_2024_3035.js"></script>
         <script src="assets/js/script.js"></script>
     </body>
 </html>
