@@ -34,7 +34,7 @@
                                     <img class="journey-tile-image" src="assets/images/journey/journey-damme.jpg" alt="Gymnasium Damme">
                                     <span class="journey-tile-year">2014</span>
                                     <h3>1. GYMNASIUM DAMME</h3>
-                                    <p>Abitur<br>49401</p>
+                                    <p>Abitur</p>
                                 </article>
 
                                 <article class="journey-tile" data-stop-id="stop-hannover-bsc" tabindex="0">
@@ -54,23 +54,23 @@
                                 <article class="journey-tile" data-stop-id="stop-hannover-msc" tabindex="0">
                                     <img class="journey-tile-image" src="assets/images/journey/journey-hannover-msc.jpg" alt="HDI Zentrale Hannover">
                                     <span class="journey-tile-year">2024</span>
-                                    <h3>4. HD GLOBAL SE HANNOVER</h3>
-                                    <p>M.Sc. Geowissenschaften<br>Werkstudent Naturgefahrenmodellierung bei HDI</p>
+                                    <h3>4. HDI GLOBAL SE HANNOVER</h3>
+                                    <p>M.Sc. Geowissenschaften | NatCat &amp; GIS-Analyst<br>- GIS-gestuetzte Naturgefahrenmodellierung<br>- Risikoanalyse</p>
                                 </article>
 
                                 <article class="journey-tile" data-stop-id="stop-innsbruck" tabindex="0">
                                     <img class="journey-tile-image" src="assets/images/journey/journey-innsbruck.jpg" alt="ILF in Innsbruck">
                                     <span class="journey-tile-year">Heute</span>
                                     <h3>5. ILF CONSULTING ENGINEERS</h3>
-                                    <p>GIS Specialist<br>ILF</p>
+                                    <p>GIS Specialist<br>- raeumlich Analysis<br>- Geodatenmanagement<br>- Automatisierung von Workflows zur Geodatenprozessierung<br>- Projektmanagement</p>
                                 </article>
                             </div>
 
                             <div class="journey-map-stage">
                                 <svg class="journey-map" viewBox="0 0 760 420" aria-hidden="true">
                                     <defs>
-                                        <marker id="journey-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"></path>
+                                        <marker id="journey-arrow" viewBox="0 0 10 10" refX="8.4" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                                            <path d="M 1.5 1.8 L 8.2 5 L 1.5 8.2" fill="none" stroke="rgba(95, 80, 107, 0.55)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"></path>
                                         </marker>
                                         <clipPath id="journey-map-clip">
                                             <rect class="journey-clip-rect" x="0" y="0" width="760" height="420" rx="24" ry="24"></rect>
@@ -185,25 +185,131 @@
 
         
         <div id="work_scroll" class="pages">                                  <!-- Work starts here -->
-            <div class="container main">
+            <div class="container-fluid main">
                 <div class="row">
-                    <div class="col-md-6" id="work_left">
-                        <div id="owl-demo" class="owl-carousel owl-theme">
-                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/work.jpg"></div>
-                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/TTZ.jpg"></div>
-                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/contact_tyrol.jpg"></div>
+                    <div class="col-md-12" id="work_left">
+                        <div class="projects-page-header">
+                            <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Back to Home </a>
+                            <div id="watermark">
+                                <h2 class="page-title" text-center>Projects</h2>
+                                <div class="marker">p</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6" id="work_right">
-                        <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Back to Home </a>
-                        <div id="watermark">
-                            <h2 class="page-title" text-center>Work</h2>
-                            <div class="marker">w</div>
+                    <div class="col-md-12" id="work_right">
+                        <div class="project-accordion">
+                            <details class="project-tile" open>
+                                <summary>
+                                    <span class="project-summary-meta">Selected Project 01</span>
+                                    <strong class="project-summary-title">Global Volcanic Hazard Modelling</strong>
+                                    <span class="project-summary-icon" aria-hidden="true"></span>
+                                </summary>
+                                <div class="project-story">
+                                    <div class="project-story-row">
+                                        <div class="project-story-media is-map">
+                                            <img src="assets/images/projects/volcanic-hazard-page-1.png" alt="Global volcanic hazard map with VEI classification">
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Project Overview</h4>
+                                            <p>This project explored volcanic hazards on a global scale by combining eruption history, topography and atmospheric controls into a reproducible GIS workflow. The goal was to derive spatially explicit hazard zones for active volcanoes and to create a consistent basis for comparing different eruption environments worldwide.</p>
+                                        </div>
+                                    </div>
+                                    <div class="project-story-row is-reversed">
+                                        <div class="project-story-media is-map">
+                                            <img src="assets/images/projects/flow-hazards-page-1.png" alt="Flow hazard modelling map derived from distance accumulation">
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Flow-Hazard Modelling</h4>
+                                            <p>Lava flows, pyroclastic density currents and lahars were modelled as terrain-dependent flow hazards in ArcGIS Pro ModelBuilder using Distance Accumulation. The workflow iterated through active volcanoes, clipped a merged 90 m DEM within a 60 km radius, derived slope and aspect, converted slope into a calibrated cost raster and used a 2 km source buffer together with water barriers to simulate realistic downslope movement.</p>
+                                        </div>
+                                    </div>
+                                    <div class="project-story-row">
+                                        <div class="project-story-media is-map">
+                                            <img src="assets/images/projects/ashfall-data-stack-page-1.png" alt="Combined volcanic hazard and ashfall modelling output">
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Ashfall and Inputs</h4>
+                                            <p>Monthly ashfall scenarios for a 2 cm deposit thickness were estimated from wind direction, wind speed and the maximum VEI observed at each volcano. Different plume heights were linked to eruption intensity, which made it necessary to work with wind information from both the 950 hPa and 500 hPa levels. The modelling framework was supported by volcano coordinates and VEI history from Smithsonian and NOAA, a merged ALOS and SRTM DEM, and OSM water-body data used as a barrier layer.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <details class="project-tile">
+                                <summary>
+                                    <span class="project-summary-meta">Placeholder Project 02</span>
+                                    <strong class="project-summary-title">Urbanes Klima Monitoring</strong>
+                                    <span class="project-summary-icon" aria-hidden="true"></span>
+                                </summary>
+                                <div class="project-story">
+                                    <div class="project-story-row">
+                                        <div class="project-story-media">
+                                            <span>Luftbild / Analysekarte</span>
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Ausgangslage</h4>
+                                            <p>Diese erste Textflaeche kann spaeter Problemstellung, Untersuchungsgebiet und Zielsetzung des Projekts aufnehmen.</p>
+                                        </div>
+                                    </div>
+                                    <div class="project-story-row is-reversed">
+                                        <div class="project-story-media">
+                                            <span>Modell / Diagramm</span>
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Analyseschritte</h4>
+                                            <p>Hier kann spaeter beschrieben werden, wie die Auswertung aufgebaut war und welche Werkzeuge oder Modelle eingesetzt wurden.</p>
+                                        </div>
+                                    </div>
+                                    <div class="project-story-row">
+                                        <div class="project-story-media">
+                                            <span>Dashboard / Ergebnisgrafik</span>
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Praxisnutzen</h4>
+                                            <p>Dieser letzte Abschnitt kann spaeter den Nutzen fuer Planung, Entscheidung oder Kommunikation anschaulich zusammenfassen.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <details class="project-tile">
+                                <summary>
+                                    <span class="project-summary-meta">Placeholder Project 03</span>
+                                    <strong class="project-summary-title">Geodaten Automation Pipeline</strong>
+                                    <span class="project-summary-icon" aria-hidden="true"></span>
+                                </summary>
+                                <div class="project-story">
+                                    <div class="project-story-row">
+                                        <div class="project-story-media">
+                                            <span>Code / Workflow Platzhalter</span>
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Projektidee</h4>
+                                            <p>Hier kann spaeter kurz beschrieben werden, welche Aufgabe automatisiert wurde und warum dieser Workflow relevant war.</p>
+                                        </div>
+                                    </div>
+                                    <div class="project-story-row is-reversed">
+                                        <div class="project-story-media">
+                                            <span>Datenprozessierung</span>
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Technische Umsetzung</h4>
+                                            <p>Dieser Bereich ist fuer spaetere Details zu Skripten, Geodatenprozessierung und Systemlogik gedacht.</p>
+                                        </div>
+                                    </div>
+                                    <div class="project-story-row">
+                                        <div class="project-story-media">
+                                            <span>Reporting / Ergebnis</span>
+                                        </div>
+                                        <div class="project-story-text">
+                                            <h4>Wirkung</h4>
+                                            <p>Hier kann spaeter stehen, wie das Projekt eingesetzt wurde und welche Effizienz-, Qualitaets- oder Analysevorteile entstanden sind.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
                         </div>
-                        <p class='subtitle'>This is a selection of my web design and development work. I've been involve in many different types of project.
-                        </p>
-                        <p class="info">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
                     </div>
                 </div>
             </div>    

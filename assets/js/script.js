@@ -112,29 +112,52 @@ $( document ).ready(function() {
                             };
                         }
 
-                        return baseOffset;
+                        return {
+                            x: Math.round(baseOffset.x * 1.38),
+                            y: Math.round(baseOffset.y * 1.38),
+                        };
                     };
 
                     const getLabelGeometry = (stop) => {
                         const point = projectPoint([stop.lon, stop.lat]);
                         const offset = getLabelOffset(stop);
                         const labelPoint = [point[0] + offset.x, point[1] + offset.y];
-                        const deltaX = labelPoint[0] - point[0];
-                        const deltaY = labelPoint[1] - point[1];
+                        const deltaX = point[0] - labelPoint[0];
+                        const deltaY = point[1] - labelPoint[1];
                         const length = Math.hypot(deltaX, deltaY) || 1;
-                        const labelInset = isCompactLayout ? 9 : 11;
+                        const unitX = deltaX / length;
+                        const unitY = deltaY / length;
+                        const labelRadius = isCompactLayout ? 8 : 9;
+                        const labelHalo = isCompactLayout ? 6 : 7;
+                        const labelBuffer = labelRadius + labelHalo;
+                        const pointRadius = isCompactLayout ? 2.5 : 3;
+                        const pointBuffer = pointRadius + (isCompactLayout ? 2.5 : 3.5);
+                        const visibleLength = Math.max(0, length - labelBuffer - pointBuffer);
+                        const shortenedLength = visibleLength * 0.5;
+                        const extraTrimFromLabelSide = visibleLength - shortenedLength;
+                        const shortenedLabelBuffer = labelBuffer + extraTrimFromLabelSide;
 
                         return {
                             point,
                             labelPoint,
+                            lineStart: [
+                                labelPoint[0] + (unitX * shortenedLabelBuffer),
+                                labelPoint[1] + (unitY * shortenedLabelBuffer),
+                            ],
                             lineEnd: [
-                                labelPoint[0] - ((deltaX / length) * labelInset),
-                                labelPoint[1] - ((deltaY / length) * labelInset),
+                                point[0] - (unitX * pointBuffer),
+                                point[1] - (unitY * pointBuffer),
                             ],
                         };
                     };
 
                     const stopNodeById = new Map(stops.map((stop) => [stop.id, stop.node]));
+                    const stopDotNodeById = new Map(
+                        stops.map((stop) => [stop.id, stop.node.querySelector('.journey-dot')])
+                    );
+                    const stopLabelNodeById = new Map(
+                        stops.map((stop) => [stop.id, stop.node.querySelector('.journey-label')])
+                    );
                     const tileNodeById = new Map(tileNodes.map((tileNode) => [tileNode.dataset.stopId, tileNode]));
                     const leaderLineNodeById = new Map();
                     let hoveredStopId = null;
@@ -144,6 +167,24 @@ $( document ).ready(function() {
                         const effectiveHoverStopId = pinnedStopId ? null : hoveredStopId;
 
                         stopNodeById.forEach((node, stopId) => {
+                            node.classList.toggle('is-hovered', effectiveHoverStopId === stopId);
+                            node.classList.toggle('is-pinned', pinnedStopId === stopId);
+                        });
+
+                        stopDotNodeById.forEach((node, stopId) => {
+                            if (!node) {
+                                return;
+                            }
+
+                            node.classList.toggle('is-hovered', effectiveHoverStopId === stopId);
+                            node.classList.toggle('is-pinned', pinnedStopId === stopId);
+                        });
+
+                        stopLabelNodeById.forEach((node, stopId) => {
+                            if (!node) {
+                                return;
+                            }
+
                             node.classList.toggle('is-hovered', effectiveHoverStopId === stopId);
                             node.classList.toggle('is-pinned', pinnedStopId === stopId);
                         });
@@ -170,10 +211,15 @@ $( document ).ready(function() {
                     };
 
                     const bindInteractiveEvents = (element, stopId) => {
-                        element.addEventListener('mouseenter', () => setHoveredStopId(stopId));
-                        element.addEventListener('mouseleave', () => setHoveredStopId(null));
-                        element.addEventListener('focus', () => setHoveredStopId(stopId));
-                        element.addEventListener('blur', () => setHoveredStopId(null));
+                        const activateHover = () => setHoveredStopId(stopId);
+                        const clearHover = () => setHoveredStopId(null);
+
+                        element.addEventListener('mouseenter', activateHover);
+                        element.addEventListener('mouseleave', clearHover);
+                        element.addEventListener('pointerenter', activateHover);
+                        element.addEventListener('pointerleave', clearHover);
+                        element.addEventListener('focus', activateHover);
+                        element.addEventListener('blur', clearHover);
                         element.addEventListener('click', (event) => {
                             event.stopPropagation();
                             setPinnedStopId(stopId);
@@ -331,14 +377,73 @@ $( document ).ready(function() {
                         ...getLabelGeometry(stop),
                     }));
 
+                    const rotateVectorClockwise = (vector, degrees) => {
+                        const radians = (degrees * Math.PI) / 180;
+                        const cos = Math.cos(radians);
+                        const sin = Math.sin(radians);
+
+                        return [
+                            (vector[0] * cos) - (vector[1] * sin),
+                            (vector[0] * sin) + (vector[1] * cos),
+                        ];
+                    };
+
+                    const buildRouteGeometry = (fromPoint, toPoint, segmentIndex) => {
+                        const deltaX = toPoint[0] - fromPoint[0];
+                        const deltaY = toPoint[1] - fromPoint[1];
+                        const length = Math.hypot(deltaX, deltaY) || 1;
+                        const unitX = deltaX / length;
+                        const unitY = deltaY / length;
+                        const perpendicularX = -unitY;
+                        const perpendicularY = unitX;
+                        const segmentIsUpperRoute = segmentIndex <= 2;
+                        const isFirstSegment = segmentIndex === 0;
+                        const startBuffer = isFirstSegment
+                            ? (isCompactLayout ? 5.5 : 7)
+                            : segmentIsUpperRoute
+                                ? (isCompactLayout ? 3.5 : 4.5)
+                                : (isCompactLayout ? 7 : 9);
+                        const endBuffer = isFirstSegment
+                            ? (isCompactLayout ? 9 : 11)
+                            : segmentIsUpperRoute
+                                ? (isCompactLayout ? 6.5 : 8)
+                                : (isCompactLayout ? 13 : 16);
+                        const routeStart = [
+                            fromPoint[0] + (unitX * startBuffer),
+                            fromPoint[1] + (unitY * startBuffer),
+                        ];
+                        const routeEnd = [
+                            toPoint[0] - (unitX * endBuffer),
+                            toPoint[1] - (unitY * endBuffer),
+                        ];
+                        const curveSigns = [-1, -1, -1, 1];
+                        const curveSign = curveSigns[segmentIndex] || 1;
+                        const baseCurveAmount = Math.min(
+                            isCompactLayout ? 18 : 28,
+                            Math.max(isCompactLayout ? 8 : 12, length * (isCompactLayout ? 0.08 : 0.1))
+                        );
+                        const segmentCurveScale = segmentIsUpperRoute ? 0.38 : 1;
+                        const curveAmount = baseCurveAmount * segmentCurveScale * curveSign;
+                        const controlPoint = [
+                            ((routeStart[0] + routeEnd[0]) / 2) + (perpendicularX * curveAmount),
+                            ((routeStart[1] + routeEnd[1]) / 2) + (perpendicularY * curveAmount),
+                        ];
+
+                        return {
+                            routeStart,
+                            controlPoint,
+                            routeEnd,
+                        };
+                    };
+
                     leaderLineLayer
                         .selectAll('line')
                         .data(stopAnnotations)
                         .join('line')
                         .attr('class', 'journey-leader-line')
                         .attr('data-stop-id', ({ stop }) => stop.id)
-                        .attr('x1', ({ point }) => point[0])
-                        .attr('y1', ({ point }) => point[1])
+                        .attr('x1', ({ lineStart }) => lineStart[0])
+                        .attr('y1', ({ lineStart }) => lineStart[1])
                         .attr('x2', ({ lineEnd }) => lineEnd[0])
                         .attr('y2', ({ lineEnd }) => lineEnd[1])
                         .each(function(datum) {
@@ -351,8 +456,8 @@ $( document ).ready(function() {
                         .join('line')
                         .attr('class', 'journey-leader-hit')
                         .attr('data-stop-id', ({ stop }) => stop.id)
-                        .attr('x1', ({ point }) => point[0])
-                        .attr('y1', ({ point }) => point[1])
+                        .attr('x1', ({ lineStart }) => lineStart[0])
+                        .attr('y1', ({ lineStart }) => lineStart[1])
                         .attr('x2', ({ lineEnd }) => lineEnd[0])
                         .attr('y2', ({ lineEnd }) => lineEnd[1])
                         .on('mouseenter', (_, datum) => setHoveredStopId(datum.stop.id))
@@ -368,11 +473,71 @@ $( document ).ready(function() {
                         .join('path')
                         .attr('class', 'journey-route-line')
                         .attr('marker-end', 'url(#journey-arrow)')
-                        .attr('d', ([fromStop, toStop]) => {
+                        .attr('d', ([fromStop, toStop], segmentIndex) => {
+                            const segmentShifts = [
+                                [-5, -4],
+                                [1, -2],
+                                [0, 3],
+                                [-7, 0],
+                            ];
                             const fromPoint = projectPoint([fromStop.lon, fromStop.lat]);
                             const toPoint = projectPoint([toStop.lon, toStop.lat]);
+                            if (segmentIndex === 0) {
+                                const templateFromPoint = projectPoint([stops[1].lon, stops[1].lat]);
+                                const templateToPoint = projectPoint([stops[2].lon, stops[2].lat]);
+                                const templateGeometry = buildRouteGeometry(templateFromPoint, templateToPoint, 1);
+                                const templateEndVector = [
+                                    templateGeometry.routeEnd[0] - templateGeometry.routeStart[0],
+                                    templateGeometry.routeEnd[1] - templateGeometry.routeStart[1],
+                                ];
+                                const templateControlVector = [
+                                    templateGeometry.controlPoint[0] - templateGeometry.routeStart[0],
+                                    templateGeometry.controlPoint[1] - templateGeometry.routeStart[1],
+                                ];
+                                const currentGeometry = buildRouteGeometry(fromPoint, toPoint, 0);
+                                const specialScale = 0.49;
+                                const specialShift = segmentShifts[0];
+                                const transformedEndVector = rotateVectorClockwise([
+                                    templateEndVector[0] * specialScale,
+                                    templateEndVector[1] * specialScale,
+                                ], 20);
+                                const transformedControlVector = rotateVectorClockwise([
+                                    templateControlVector[0] * specialScale,
+                                    templateControlVector[1] * specialScale,
+                                ], 20);
+                                const routeStart = currentGeometry.routeStart;
+                                const shiftedRouteStart = [
+                                    routeStart[0] + specialShift[0],
+                                    routeStart[1] + specialShift[1],
+                                ];
+                                const routeEnd = [
+                                    shiftedRouteStart[0] + transformedEndVector[0],
+                                    shiftedRouteStart[1] + transformedEndVector[1],
+                                ];
+                                const controlPoint = [
+                                    shiftedRouteStart[0] + transformedControlVector[0],
+                                    shiftedRouteStart[1] + transformedControlVector[1],
+                                ];
 
-                            return `M ${fromPoint[0]} ${fromPoint[1]} L ${toPoint[0]} ${toPoint[1]}`;
+                                return `M ${shiftedRouteStart[0]} ${shiftedRouteStart[1]} Q ${controlPoint[0]} ${controlPoint[1]} ${routeEnd[0]} ${routeEnd[1]}`;
+                            }
+
+                            const geometry = buildRouteGeometry(fromPoint, toPoint, segmentIndex);
+                            const segmentShift = segmentShifts[segmentIndex] || [0, 0];
+                            const shiftedRouteStart = [
+                                geometry.routeStart[0] + segmentShift[0],
+                                geometry.routeStart[1] + segmentShift[1],
+                            ];
+                            const shiftedControlPoint = [
+                                geometry.controlPoint[0] + segmentShift[0],
+                                geometry.controlPoint[1] + segmentShift[1],
+                            ];
+                            const shiftedRouteEnd = [
+                                geometry.routeEnd[0] + segmentShift[0],
+                                geometry.routeEnd[1] + segmentShift[1],
+                            ];
+
+                            return `M ${shiftedRouteStart[0]} ${shiftedRouteStart[1]} Q ${shiftedControlPoint[0]} ${shiftedControlPoint[1]} ${shiftedRouteEnd[0]} ${shiftedRouteEnd[1]}`;
                         });
 
                     stops.forEach((stop) => {
